@@ -2,14 +2,12 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const User = require('./models/user');
+const User = require('./models/userModel');
+const jsonwebtoken = require('jsonwebtoken');
 
 
 const app = express();
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 
 const { dbConnect } = require('./db/connection');
@@ -20,33 +18,54 @@ catch (err) {
     console.log("database not connected due to : "+err);
 }
 
-//For Test purpose
-app.post("/", (req, res, next) => {
-    console.log(req.body);
-    const { first_name,last_name, email,password } = req.body;
-    const us1 = new User();
-    us1.email = email;
-    us1.first_name = first_name;
-    us1.last_name = last_name;
-    us1.password=password
-    us1.save();
-    res.json(us1);
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.post("login", async (req, res) => {
+    try {
+        const { email, password, } = req.body;
+        const user = await User.findOne({ email: email })
+        if (password == user.password) {
+            const token = jsonwebtoken.sign({
+                user_id: user._id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                phone_number: user.phone_number,
+                password:null
+            }, "LOST_AND_FOUND_SECRET")
+        
+            res.json({ success: true, data: token })
+        }
+        throw new Error("wrong Password")
+    }
+    catch (e) {
+        next(e)
+   
+        }
 })
 
-
+    
 app.use(('*'), (req, res, next) => {
     next(new Error('Route Not found'))
     
 })
 
 app.use((err, req, res, next) => {
+    res.status(400).json({
+        success: false,
+        data: err.message
+    })
     
 
-    res.json({error:err.message})
+   
 })
-
-
-
 app.listen(process.env.PORT||3000, () => {
     console.log("running on port 3000");
 })
+
+
+
+
