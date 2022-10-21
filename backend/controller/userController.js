@@ -1,14 +1,16 @@
-const express = require("express");
-const jsonwebtoken = require("jsonwebtoken");
-const { sign } = require('jsonwebtoken');
+
 const User = require("../models/userModel");
+const jsonwebtoken = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
 
 module.exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+      const { email, password } = req.body;
+      
       const user = await User.findOne({ email: email });
       if (user) {
-        if (password == user.password) {
+          const check_password= await bcrypt.compare(password,user.password)
+        if (check_password) {
             const token = jsonwebtoken.sign(
               {
                 user_id: user._id,
@@ -40,8 +42,11 @@ module.exports.signup = async (req, res, next) => {
     try {
         const exUser = await User.findOne({ email });
         if (!exUser) {
+            const salt = await bcrypt.genSalt(10);
+            const password_hash = await bcrypt.hash(password, salt) 
+            console.log(salt);
             const user = await User.create({
-              email, password, first_name,last_name, phone_number,
+              email, password:password_hash, first_name,last_name, phone_number,
             });
             const token = jsonwebtoken.sign({
                 user_id:user._id,
@@ -50,6 +55,7 @@ module.exports.signup = async (req, res, next) => {
                 email: user.email,
                 phone_number: user.phone_number,
             }, 'LOST_AND_FOUND_SECRET');
+           
             res.status(200).json({ data:token });
         }
         else {
