@@ -24,8 +24,13 @@ module.exports.login = async (req, res, next) => {
           "LOST_AND_FOUND_SECRET"
         );
         res.json({ success: true, data: token });
+        console.log("here");
       }
-      throw new Error("Wrong Password Try Again");
+      else {
+        throw new Error("Wrong Password Try Again");
+        
+      }
+
     } else {
       throw new Error("Couldn't find your Lost_and_Found account");
     }
