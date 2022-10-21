@@ -8,4 +8,4 @@ module.exports.checkToken = ((res, req, next) => {
     }
     next();
     
-})
+});

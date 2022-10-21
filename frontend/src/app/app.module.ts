@@ -15,6 +15,8 @@ import { PostComponent } from './components/pages/post/post.component';
 import { MapComponent } from './components/pages/map/map.component';
 import { NotFoundComponent } from './components/partials/not-found/not-found.component';
 import { SearchComponent } from './components/partials/search/search.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,14 @@ import { SearchComponent } from './components/partials/search/search.component';
     MapComponent,
     NotFoundComponent,
     SearchComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],

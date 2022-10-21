@@ -1,0 +1,21 @@
+img, .mat-card-image{
+  width: 350px;
+  height: 350px;
+  border-radius:10px;
+
+  object-fit: cover;
+  margin: 0px !important;
+
+}
+mat-card-avatar{
+  text-align: center;
+}
+
+.mat-card-content{
+  width: 300px;
+  height: 350px;
+}
+.item-card{
+  /* background-color: transparent; */
+  cursor: pointer;
+}
