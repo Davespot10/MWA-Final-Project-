@@ -51,6 +51,5 @@ module.exports = {
   getItems,
   updateItemById,
   getItemById,
-  getItemById,
   deleteItemById,
 };
