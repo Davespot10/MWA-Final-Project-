@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const e = require("express");
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -65,4 +66,61 @@ module.exports.signup = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+
 };
+module.exports.getAllUsers = async (req, res, next) => {
+  try {
+    const result = await User.find({})
+    res.json({success:true,users:result})
+    
+  }
+  catch (e) {
+    res.json({err:e.message})
+    
+    
+  }
+
+}
+module.exports.getUserById = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const result=await User.findById(user_id)
+    res.json({success:true,user:result})
+    
+  }
+  catch(e) {
+    res.json({success:false,error:e.message})
+    
+  }
+
+}
+module.exports.deletUserById = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const result = await User.findByIdAndDelete(user_id)
+    res.json({success:true,result:"Item Delated Succesfully"})
+    
+  }
+  catch(e) {
+    res.json({success:false,error:e.message})
+    
+  }
+
+}
+module.exports.editUserById = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const new_user = req.body;
+    const result = await User.findByIdAndUpdate({_id:user_id }, new_user)
+    res.json({success:true,result:"User information Updated Succesfully"})
+    
+  }
+  catch (e) {
+    res.json({success:false,error:e.message})
+    
+  }
+
+}
+
+
+
