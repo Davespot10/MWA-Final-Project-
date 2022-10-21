@@ -47,7 +47,9 @@ export class AppComponent {
       formdata.append('files',img)
     }
 
-    this.http.post<any>('http://localhost:3000/multipleFiles', formdata)
+    var params = {Bucket :'', Key: '', Expires: '', ContentType : formdata.type};
+    var url = this.bucket.getSignedUrl('putObjects', params);
+    this.http.put<any>(url, formdata)
       .subscribe((res) => {
         console.log(res)
         this.multipleInput.nativeElement.value = ""
