@@ -14,7 +14,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post.component';
 import { SearchComponent } from './search.component';
-import { HomeComponent } from './home.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemComponent } from './item.component';
 const ItemsComponents = [
   MatButtonModule,
@@ -27,6 +27,7 @@ const ItemsComponents = [
   MatProgressBarModule,
   MatRadioModule,
   MatSelectModule,
+  FlexLayoutModule,
   MaterialFileInputModule
 ];
 @NgModule({
