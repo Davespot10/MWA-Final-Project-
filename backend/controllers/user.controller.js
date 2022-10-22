@@ -1,7 +1,8 @@
 const User = require("../models/user");
 const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const e = require("express");
+const { StatusCodes } = require('http-status-codes');
+
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -21,9 +22,9 @@ module.exports.login = async (req, res, next) => {
             email: user.email,
             phone_number: user.phone_number,
           },
-          "LOST_AND_FOUND_SECRET"
+          process.env.SECRET_KEY
         );
-        res.json({ success: true, data: token });
+        res.status(StatusCodes.OK).json({ success: true, data: token });
         console.log("here");
       }
       else {
@@ -61,10 +62,10 @@ module.exports.signup = async (req, res, next) => {
           email: user.email,
           phone_number: user.phone_number,
         },
-        "LOST_AND_FOUND_SECRET"
+        process.env.SECRET_KEY
       );
 
-      res.status(200).json({ data: token });
+      res.status(StatusCodes.CREATED).json({ data: token });
     } else {
       res.status(409).json({ message: "User Already Exit" });
     }
@@ -76,7 +77,8 @@ module.exports.signup = async (req, res, next) => {
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const result = await User.find({})
-    res.json({success:true,users:result})
+    console.log(result);
+    res.status(StatusCodes.OK).json({result})
     
   }
   catch (e) {
@@ -90,11 +92,11 @@ module.exports.getUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
     const result=await User.findById(user_id)
-    res.json({success:true,user:result})
+    res.status(StatusCodes.OK).json({result})
     
   }
   catch(e) {
-    res.json({success:false,error:e.message})
+    res.json({error:e.message})
     
   }
 
@@ -103,11 +105,11 @@ module.exports.deletUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
     const result = await User.findByIdAndDelete(user_id)
-    res.json({success:true,result:"Item Delated Succesfully"})
+    res.status(StatusCodes.OK).json({success:true,result:"Item Delated Succesfully"})
     
   }
   catch(e) {
-    res.json({success:false,error:e.message})
+    res.json({error:e.message})
     
   }
 
@@ -116,12 +118,17 @@ module.exports.editUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
     const new_user = req.body;
-    const result = await User.findByIdAndUpdate({_id:user_id }, new_user)
-    res.json({success:true,result:"User information Updated Succesfully"})
+    const result = await User.findByIdAndUpdate({ _id: user_id }, new_user);
+    if (result) {
+      res.status(StatusCodes.OK).json({ success: true, result: "User information Updated Succesfully" })
+    }
+    else {
+      throw new Error("User Not Found on the Given Id  ")
+    }
     
   }
   catch (e) {
-    res.json({success:false,error:e.message})
+    res.json({error:e.message})
     
   }
 
