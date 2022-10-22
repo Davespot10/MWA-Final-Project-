@@ -13,9 +13,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post.component';
-import { SearchComponent } from './search.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemComponent } from './item.component';
+import { FormsModule } from '@angular/forms';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -26,18 +26,17 @@ const ItemsComponents = [
   MatInputModule,
   MatProgressBarModule,
   MatRadioModule,
+  FormsModule,
   MatSelectModule,
   FlexLayoutModule,
   MaterialFileInputModule
 ];
 @NgModule({
+
   imports: [ItemsComponents,
     RouterModule.forChild([
       {
         path:'create', component:PostComponent
-      },
-      {
-        path:'search', component:SearchComponent
       },
       {
         path:'views', component:ItemComponent
@@ -47,5 +46,7 @@ const ItemsComponents = [
     ])
   ],
   exports: [ItemsComponents],
+  declarations: [
+  ],
 })
 export class ItemModule {}

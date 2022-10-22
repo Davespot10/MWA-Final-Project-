@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
-
 @Component({
   selector: 'app-item',
   template: `
+    <div class="search-btn">
+      <mat-form-field class="item-card" appearance="fill" fxFlex="75">
+          <mat-label>Search for items </mat-label>
+        <input matInput  [(ngModel)]="searchItems"/>
+        <mat-icon matSuffix>search</mat-icon>
+        <div class="spacer"></div>
+      </mat-form-field>
+    </div>
+
     <div class="items" *ngIf="items">
       <div fxLayout="row wrap" fxLayoutGap.gt-lg="16px grid">
         <div
           fxFlex="33%"
           fxFlex.xs="100%"
           fxFlex.sm="50%"
-          *ngFor="let item of items"
+          *ngFor="let item of items |  searchText : searchItems"
         >
           <mat-card class="item-card mat-elevation-z4">
             <mat-card-header class="card-container">
-              <mat-card-title >{{
-                item.postType
-              }}</mat-card-title>
-              <mat-card-subtitle >{{
-                item.itemType
-              }}</mat-card-subtitle>
+              <mat-card-title>{{ item.postType }}</mat-card-title>
+              <mat-card-subtitle>{{ item.itemType }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <div class="post-item">
@@ -37,8 +40,7 @@ import { ItemService } from './item.service';
               <h3>{{ item.description }}</h3>
             </mat-card-content>
             <mat-card-footer>
-
-                <!-- I think we need to the map here or on the details page  -->
+              <!-- I think we need to the map here or on the details page  -->
             </mat-card-footer>
           </mat-card>
         </div>
@@ -51,7 +53,7 @@ import { ItemService } from './item.service';
         padding: 16px;
       }
       .card-container {
-        color:#E64A19;
+        color: #e64a19;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -68,11 +70,21 @@ import { ItemService } from './item.service';
         cursor: pointer;
         text-align: center;
       }
+
+      .search-btn {
+        margin: 25px;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+        border-radius: 15px;
+      }
+
     `,
   ],
 })
 export class ItemComponent implements OnInit {
-  items: Item[]=[];
+  items: Item[] = [];
+  searchItems : string='';
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
