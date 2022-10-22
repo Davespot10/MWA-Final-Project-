@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const User = require('./user');
 const ItemSchema = new mongoose.Schema(
   {
     itemType: {
@@ -35,7 +35,6 @@ const ItemSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
-      
     },
     lat: {
       type: Number,
@@ -45,10 +44,20 @@ const ItemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    ownerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      type:Number,
-      required: true,
+    owner: {
+      firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      phone: String,
     },
   },
 

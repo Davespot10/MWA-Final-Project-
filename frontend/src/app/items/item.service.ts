@@ -7,7 +7,8 @@ import {Observable} from 'rxjs'
   providedIn: 'root'
 })
 export class ItemService {
-   BASE_URL="http://localhost:3000/api/items";  // to be moved to environmental variable
+   BASE_URL="http://localhost:3000/api/items";
+    // to be moved to environmental variable
 
   constructor(private http:HttpClient) { }
 
@@ -32,4 +33,5 @@ export class ItemService {
     return this.http.delete<Item>(this.BASE_URL);
 
   }
+
 }
