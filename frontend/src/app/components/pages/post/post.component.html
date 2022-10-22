@@ -32,7 +32,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Upload Image</mat-label>
-        <ngx-mat-file-input formControlName="imageUrl"  required (change)="upload()"
+        <ngx-mat-file-input formControlName="imageUrl"  required (change)="upload($event)"
                             multiple></ngx-mat-file-input>
         <mat-icon matSuffix>upload</mat-icon>
       </mat-form-field>
