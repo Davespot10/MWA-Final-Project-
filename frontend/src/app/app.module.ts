@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './modules/material/material.module';
-import { HeaderComponent } from './components/partials/header/header.component';
-import { FooterComponent } from './components/partials/footer/footer.component';
-import { HomeComponent } from './components/pages/home/home.component';
-import { ItemComponent } from './components/pages/item/item.component';
-import { LoginComponent } from './components/pages/login/login.component';
-import { RegisterComponent } from './components/pages/register/register.component';
-import { PostComponent } from './components/pages/post/post.component';
-import { MapComponent } from './components/pages/map/map.component';
-import { NotFoundComponent } from './components/partials/not-found/not-found.component';
-import { SearchComponent } from './components/partials/search/search.component';
+import { ItemModule } from './items/item.module';
+import { HeaderComponent } from './items/header.component';
+import { FooterComponent } from './items/footer.component';
+import { HomeComponent } from './items/home.component';
+import { ItemComponent } from './items/item.component';
+import { LoginComponent } from './items/login.component';
+import { RegisterComponent } from './items/register.component';
+import { PostComponent } from './items/post.component';
+import { NotFoundComponent } from './items/not-found.component';
+import { SearchComponent } from './items/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -28,7 +26,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     PostComponent,
-    MapComponent,
     NotFoundComponent,
     SearchComponent
 
@@ -36,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule,
+    ItemModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule

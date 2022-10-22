@@ -11,7 +11,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio'
 import {MatSelectModule} from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-const MaterialComponents = [
+import { RouterModule } from '@angular/router';
+import { PostComponent } from './post.component';
+import { SearchComponent } from './search.component';
+import { HomeComponent } from './home.component';
+import { ItemComponent } from './item.component';
+const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,
@@ -25,7 +30,21 @@ const MaterialComponents = [
   MaterialFileInputModule
 ];
 @NgModule({
-  imports: [MaterialComponents],
-  exports: [MaterialComponents],
+  imports: [ItemsComponents,
+    RouterModule.forChild([
+      {
+        path:'create', component:PostComponent
+      },
+      {
+        path:'search', component:SearchComponent
+      },
+      {
+        path:'views', component:ItemComponent
+      }
+      // more lazy loading to be included here
+
+    ])
+  ],
+  exports: [ItemsComponents],
 })
-export class MaterialModule {}
+export class ItemModule {}

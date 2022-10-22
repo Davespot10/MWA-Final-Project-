@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  template: `<p>search works!</p>`,
+  styles: [``],
 })
 export class SearchComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
