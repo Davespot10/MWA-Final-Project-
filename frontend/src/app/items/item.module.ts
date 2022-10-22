@@ -14,7 +14,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post.component';
 import { SearchComponent } from './search.component';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from '../home.component';
 import { ItemComponent } from './item.component';
 const ItemsComponents = [
   MatButtonModule,
