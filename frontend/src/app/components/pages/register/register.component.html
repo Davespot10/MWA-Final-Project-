@@ -1,18 +1,18 @@
-<form [formGroup]="userInfoFormGroup">
+<form [formGroup]="userInfoFormGroup"class="emailPass">
   <ng-template matStepLabel>User Information </ng-template>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="field">
     <mat-label>First Name </mat-label>
-    <input matInput placeholder="Ex. John" formControlName="firstName" required>
+    <input matInput placeholder="Ex. Dawit" formControlName="firstName" required>
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="field">
     <mat-label>Last Name </mat-label>
-    <input matInput placeholder="Ex. Doe" formControlName="lastName" required>
+    <input matInput placeholder="Ex. Demelash" formControlName="lastName" required>
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="field">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="Ex. john@example.com" formControlName="email" required>
+    <input matInput placeholder="Ex. davespot@gmail.com" formControlName="email" required>
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="field">
     <mat-label>Phone</mat-label>
     <input matInput placeholder="Ex. 4657896" formControlName="phone">
   </mat-form-field>

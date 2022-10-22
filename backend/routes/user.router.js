@@ -1,5 +1,8 @@
 const express = require('express');
-const { login, signup,deletUserById,getAllUsers,getUserById,editUserById } = require("../controllers/user.controller")
+const { login, signup, deletUserById, getAllUsers, getUserById, editUserById } = require("../controllers/user.controller")
+const {checkToken}  = require("../middleware/checkToken");
+
+
 
 const router = express.Router();
 

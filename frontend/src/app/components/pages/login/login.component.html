@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="emailPass">
+    <form [formGroup]="userInfoFormGroup">
+        <!-- <ng-template matStepLabel>User Information </ng-template> -->
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Ex. John" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Ex. Doe" formControlName="password" required>
+        </mat-form-field>
+    </form>
+
+</div>
+<div class="submit">
+    <button *ngIf="!submit" mat-raised-button (click)="Login()" color="accent" class="stepper-btn">Login</button>
+    <mat-progress-bar mode="indeterminate" *ngIf="submit"></mat-progress-bar>
+
+</div>

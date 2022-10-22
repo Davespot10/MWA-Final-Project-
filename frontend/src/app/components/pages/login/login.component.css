@@ -1,0 +1,30 @@
+
+  .submit{
+    display:flex;
+    justify-content: center;
+    width: 100%;
+  
+  }
+  .stepper-btn{
+    padding: 0 6px 0 6px;
+      margin: 6px 8px 6px 8px;
+      min-width: 130px;
+      min-height: 40px;
+      border-radius: 0px;
+      font-size: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      text-decoration:none;
+      border: none;
+      outline: none;
+      background-color: green;
+  }
+  .emailPass{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+
+  .field{
+    width: 100%;
+  }
