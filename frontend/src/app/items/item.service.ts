@@ -20,7 +20,7 @@ export class ItemService {
     return this.http.get<Item[]>(this.BASE_URL);
   }
   getItemById(id:string):Observable<Item>{
-    return this.http.get<Item>(this.BASE_URL +id);
+    return this.http.get<Item>(this.BASE_URL+'/' +id);
   }
   searchItems(qParams:any, skip:any){
     // search to be implemented here

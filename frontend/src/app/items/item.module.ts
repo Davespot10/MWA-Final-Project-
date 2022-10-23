@@ -16,6 +16,8 @@ import { PostComponent } from './post.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemComponent } from './item.component';
 import { FormsModule } from '@angular/forms';
+import { DetailsComponent } from './details.component';
+import {MatGridListModule } from '@angular/material/grid-list';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -29,7 +31,8 @@ const ItemsComponents = [
   FormsModule,
   MatSelectModule,
   FlexLayoutModule,
-  MaterialFileInputModule
+  MaterialFileInputModule,
+  MatGridListModule
 ];
 @NgModule({
 
@@ -40,6 +43,9 @@ const ItemsComponents = [
       },
       {
         path:'views', component:ItemComponent
+      },
+      {
+        path:'items/:id', component:DetailsComponent
       }
       // more lazy loading to be included here
 
@@ -47,6 +53,8 @@ const ItemsComponents = [
   ],
   exports: [ItemsComponents],
   declarations: [
+
+    DetailsComponent
   ],
 })
 export class ItemModule {}

@@ -6,8 +6,8 @@ import { ItemService } from './item.service';
   template: `
     <div class="search-btn">
       <mat-form-field class="item-card" appearance="fill" fxFlex="75">
-          <mat-label>Search for items </mat-label>
-        <input matInput  [(ngModel)]="searchItems"/>
+        <mat-label>Search for items </mat-label>
+        <input matInput [(ngModel)]="searchItems" />
         <mat-icon matSuffix>search</mat-icon>
         <div class="spacer"></div>
       </mat-form-field>
@@ -19,30 +19,32 @@ import { ItemService } from './item.service';
           fxFlex="33%"
           fxFlex.xs="100%"
           fxFlex.sm="50%"
-          *ngFor="let item of items |  searchText : searchItems"
+          *ngFor="let item of items | searchText: searchItems"
         >
-          <mat-card class="item-card mat-elevation-z4">
-            <mat-card-header class="card-container">
-              <mat-card-title>{{ item.postType }}</mat-card-title>
-              <mat-card-subtitle>{{ item.itemType }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="post-item">
-                <div class="item-image">
-                  <img
-                    mat-card-image
-                    src="https://images.ctfassets.net/16nm6vz43ids/1GwdOaWeHitrvRthtctmdL/5a6cb6e5208b474b61e8aaac0d8a5e02/How_to_find_lost_or_stolen_laptop.jpg"
-                    alt="laptop"
-                  />
+          <a routerLink="/items/{{ item._id}}">
+            <mat-card class="item-card mat-elevation-z4">
+              <mat-card-header class="card-container">
+                <mat-card-title>{{ item.postType }}</mat-card-title>
+                <mat-card-subtitle>{{ item.itemType }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="post-item">
+                  <div class="item-image">
+                    <img
+                      mat-card-image
+                      src="https://images.ctfassets.net/16nm6vz43ids/1GwdOaWeHitrvRthtctmdL/5a6cb6e5208b474b61e8aaac0d8a5e02/How_to_find_lost_or_stolen_laptop.jpg"
+                      alt="laptop"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <h3>{{ item.description }}</h3>
-            </mat-card-content>
-            <mat-card-footer>
-              <!-- I think we need to the map here or on the details page  -->
-            </mat-card-footer>
-          </mat-card>
+                <h3>{{ item.description }}</h3>
+              </mat-card-content>
+              <mat-card-footer>
+                <!-- I think we need to the map here or on the details page  -->
+              </mat-card-footer>
+            </mat-card>
+          </a>
         </div>
       </div>
     </div>
@@ -78,23 +80,27 @@ import { ItemService } from './item.service';
         font-size: 20px;
         border-radius: 15px;
       }
-
+      a{
+        text-decoration:none;
+      }
     `,
   ],
 })
 export class ItemComponent implements OnInit {
   items: Item[] = [];
-  searchItems : string='';
+  searchItems: string = '';
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
     this.getAllItems();
+
   }
 
   getAllItems() {
     this.itemService.getItems().subscribe({
       next: (result: Item[]) => {
         this.items = result;
+        console.log(result);
       },
       error: (err: any) => {
         console.log(err);

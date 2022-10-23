@@ -43,6 +43,7 @@ const getItems = async (req, res, next) => {
 const getItemById = async (req, res, next) => {
   try {
     const item = await Item.findById(req.params.id);
+    console.log("What is goin on here " ,item);
     res.status(StatusCodes.OK).json(item );
   } catch (error) {
     res.json({ error });

@@ -8,10 +8,11 @@ const {
 } = require('../controllers/item.controller');
 const {checkToken}  = require("../middleware/checkToken");
 
+// middle ware is removed for testing purpose only 
 router.get('/api/items', getItems);
-router.post('/api/items',checkToken ,postItems);
-router.put('/api/items/:id',checkToken ,updateItemById);
-router.get('/api/items/:id', checkToken,getItemById);
-router.delete('/api/items/:id',checkToken, deleteItemById);
+router.post('/api/items', postItems);
+router.put('/api/items/:id' ,updateItemById);
+router.get('/api/items/:id', getItemById);
+router.delete('/api/items/:id', deleteItemById);
 
 module.exports = router;
