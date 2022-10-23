@@ -13,7 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemComponent } from './item.component';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details.component';
@@ -30,7 +30,7 @@ const ItemsComponents = [
   MatRadioModule,
   FormsModule,
   MatSelectModule,
-  FlexLayoutModule,
+  // FlexLayoutModule,
   MaterialFileInputModule,
   MatGridListModule
 ];
@@ -57,4 +57,6 @@ const ItemsComponents = [
     DetailsComponent
   ],
 })
-export class ItemModule {}
+export class ItemModule {
+  
+}

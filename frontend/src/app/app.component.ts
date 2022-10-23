@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import User from './user.interface';
+
 import { UserService } from './user.service';
-import  User  from './user.interface';
 
 
 @Component({
@@ -11,16 +12,22 @@ import  User  from './user.interface';
       <a [routerLink]="['']" routerLink="" mat-button>
         <mat-icon  class="ecology">eco</mat-icon>
       </a>
+      <span class="brandName">LF</span>
+
       <div class="spacer"></div>
-      <p *ngIf="app_state.token">Welcome {{app_state.first_name}}</p>
+
+      <p  *ngIf="app_state.token">Welcome</p>
+      &nbsp;
+      <p class="wellcome" *ngIf="app_state.token">{{app_state.first_name}}</p>
+
       <div class="spacer"></div>
       <button  [routerLink]="['']" mat-button>Home</button>
       <button *ngIf="app_state.token" [routerLink]="['/items/create']" mat-button>Create</button>
       <button *ngIf="app_state.token"  [routerLink]="['/items/views']" mat-button>View</button>
       <button *ngIf="!app_state.token" [routerLink]="['register']" mat-raised-button color="green" >signup</button>
-      
+      &nbsp;
       <button *ngIf="!app_state.token" [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
-
+      &nbsp;
       <button *ngIf="app_state.token" mat-raised-button (click)="logout()" >Logout</button>
 
 
@@ -30,12 +37,24 @@ import  User  from './user.interface';
   `,
   styles: [
     `
+   
       .spacer {
         flex: 1 1 auto;
       }
       .ecology {
         transform: scale(3);
       }
+      .brandName {
+      font-family: 'Pacifico', cursive;
+      font-weight: bold;
+      margin-left: 5px;
+      color:yellow
+    }
+    .wellcome{
+      color:chartreuse;
+      font-family: 'Pacifico', cursive;
+
+    }
     `,
   ],
 })

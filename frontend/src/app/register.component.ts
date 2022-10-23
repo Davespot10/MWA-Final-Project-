@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StepperOrientation} from '@angular/material/stepper';
-import {map, Observable} from "rxjs";
+
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {UserService} from './user.service';
 import {Router} from "@angular/router";
@@ -27,7 +26,7 @@ import {Router} from "@angular/router";
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Your password here" required>
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button mat-icon-button matSuffix (click)="hide = !hide"  [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
               <mat-error>
@@ -136,7 +135,7 @@ export class RegisterComponent  {
         next: (res: any) => {
           
         this.userService.userState.next(res);
-        this.userService.persistState();
+        // this.userService.persistState();
         this.router.navigate(['login']);
       }
     });
