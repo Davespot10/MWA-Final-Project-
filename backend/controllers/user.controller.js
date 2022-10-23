@@ -65,7 +65,7 @@ module.exports.signup = async (req, res, next) => {
         process.env.SECRET_KEY
       );
 
-      res.status(StatusCodes.CREATED).json({ data: token });
+      res.status(StatusCodes.CREATED).json({ success:true,data: token });
     } else {
       res.status(409).json({ message: "User Already Exit" });
     }
