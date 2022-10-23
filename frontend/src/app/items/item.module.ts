@@ -39,13 +39,16 @@ const ItemsComponents = [
   imports: [ItemsComponents,
     RouterModule.forChild([
       {
-        path:'create', component:PostComponent
+        path: 'create', component: PostComponent,
+        title: "Creat LF"
       },
       {
-        path:'views', component:ItemComponent
+        path: 'views', component: ItemComponent,
+        title: "View LF"
       },
       {
-        path:'items/:id', component:DetailsComponent
+        path: 'items/:id', component: DetailsComponent,
+        title: "Item Description"
       }
       // more lazy loading to be included here
 

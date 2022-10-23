@@ -34,6 +34,7 @@ import { UserService } from './user.service';
     </mat-toolbar>
 
 <router-outlet></router-outlet>
+
   `,
   styles: [
     `
@@ -59,6 +60,7 @@ import { UserService } from './user.service';
   ],
 })
 export class AppComponent implements OnInit {
+
 
 
   app_state: User = {
