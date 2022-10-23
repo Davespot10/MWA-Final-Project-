@@ -32,7 +32,7 @@ import { ItemService } from './item.service';
                   <div class="item-image">
                     <img
                       mat-card-image
-                      src="https://images.ctfassets.net/16nm6vz43ids/1GwdOaWeHitrvRthtctmdL/5a6cb6e5208b474b61e8aaac0d8a5e02/How_to_find_lost_or_stolen_laptop.jpg"
+                      src='{{item.imageUrl}}'
                       alt="laptop"
                     />
                   </div>

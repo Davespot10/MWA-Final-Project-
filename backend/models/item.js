@@ -42,20 +42,20 @@ const ItemSchema = new mongoose.Schema(
     },
     lng: {
       type: Number,
-      required: true,
+      // required: true,
     },
     owner: {
       firstName: {
         type: String,
-        required: true,
+        // required: true,
       },
       lastName: {
         type: String,
-        required: true,
+        // required: true,
       },
       email: {
         type: String,
-        required: true,
+        // required: true,
       },
       phone: String,
     },

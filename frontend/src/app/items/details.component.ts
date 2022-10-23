@@ -39,7 +39,9 @@ import { ItemService } from './item.service';
         align-items: center;
       }
       img {
-        margin-top: 60px;
+        margin:auto;
+        top:auto;
+        margin-top: -60px;
       }
     `,
   ],
