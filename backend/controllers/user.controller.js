@@ -54,18 +54,9 @@ module.exports.signup = async (req, res, next) => {
         last_name,
         phone_number,
       });
-      const token = jsonwebtoken.sign(
-        {
-          user_id: user._id,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          email: user.email,
-          phone_number: user.phone_number,
-        },
-        process.env.SECRET_KEY
-      );
 
-      res.status(StatusCodes.CREATED).json({ data: token });
+
+      res.status(StatusCodes.CREATED).json({ success:true});
     } else {
       res.status(409).json({ message: "User Already Exit" });
     }
@@ -77,7 +68,7 @@ module.exports.signup = async (req, res, next) => {
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const result = await User.find({})
-    console.log(result);
+    
     res.status(StatusCodes.OK).json({result})
     
   }
