@@ -3,7 +3,6 @@ const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { StatusCodes } = require('http-status-codes');
 
-
 module.exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;

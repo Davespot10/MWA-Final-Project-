@@ -9,9 +9,6 @@ const fs = require('fs');
 const path = require('path');
 
 
-
-
-
 //configuring the AWS environment
 
 AWS.config.update({
@@ -25,7 +22,7 @@ var s3 = new AWS.S3();
 const postItems = async (req, res, next) => {
   const { state, city, street, zipcode } = req.body;
   let address = street + ',' + city + ',' + state + ' ' + zipcode;
-  // let imgUrl;
+  
   const fileStream = fs.createReadStream(path.join(__dirname,'..','uploads',req.body.imageUrl));
   try {
     var params = {
@@ -66,6 +63,8 @@ const postItems = async (req, res, next) => {
   }
 };
 
+
+
 const getItems = async (req, res, next) => {
   try {
     const items = await Item.find({});
@@ -75,6 +74,8 @@ const getItems = async (req, res, next) => {
   }
 };
 
+
+
 const getItemById = async (req, res, next) => {
   try {
     const item = await Item.findById(req.params.id);
@@ -83,6 +84,8 @@ const getItemById = async (req, res, next) => {
     res.json({ error });
   }
 };
+
+
 const updateItemById = async (req, res, next) => {
   try {
     const item = await Item.findByIdAndUpdate({ _id: req.params.id }, req.body);

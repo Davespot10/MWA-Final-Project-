@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user');
+const geocoder = require('../utils/geocoder')
 const ItemSchema = new mongoose.Schema(
   {
     itemType: {
@@ -36,26 +37,34 @@ const ItemSchema = new mongoose.Schema(
     date: {
       type: Date,
     },
-    lat: {
-      type: Number,
-      required: true,
+    address:{
+      type:String,
+      required:[true]
     },
-    lng: {
-      type: Number,
-      // required: true,
+    location: {
+      type: {
+        type: String, 
+        enum: ['Point'], 
+       
+      },
+      coordinates: {
+        type: [Number],
+        index:'2dsphere'
+      },
+      formattedAddress:String
     },
     owner: {
       firstName: {
         type: String,
-        // required: true,
+         required: true,
       },
       lastName: {
         type: String,
-        // required: true,
+         required: true,
       },
       email: {
         type: String,
-        // required: true,
+         required: true,
       },
       phone: String,
     },
@@ -65,5 +74,17 @@ const ItemSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+ItemSchema.pre("save",async(next)=>{
+  const loc = await geocoder.geocode(this.address);
+  this.location = {
+    type:'Point',
+    coordinates:[loc[0].longitude, loc[0].latitude],
+    formattedAddress:loc[0].formattedAddress
+
+  },
+  this.address = undefined;
+  next();
+})
 
 module.exports = mongoose.model('Item', ItemSchema);

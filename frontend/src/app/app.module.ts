@@ -16,13 +16,15 @@ import { RegisterComponent } from './register.component';
 import { SearchPipe } from './search.pipe';
 import { ItemModule } from './items/item.module';
 import { HeaderComponent } from './header.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-   
+
+
     FooterComponent,
     HomeComponent,
     LoginComponent,
@@ -43,7 +45,9 @@ import { HeaderComponent } from './header.component';
     ItemModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GoogleMapsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
