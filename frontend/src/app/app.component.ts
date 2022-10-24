@@ -9,7 +9,7 @@ import { UserService } from './user.service';
   selector: 'app-root',
   template: `
   <mat-toolbar color="primary" class="mat-elevation-z8">
-      <a [routerLink]="['']" routerLink="" mat-button>
+      <a [routerLink]="['/items/views']" routerLink="" mat-button>
         <mat-icon  class="ecology">eco</mat-icon>
       </a>
       <span class="brandName">LF</span>
@@ -19,11 +19,11 @@ import { UserService } from './user.service';
       <p  *ngIf="app_state.token">Welcome</p>
       &nbsp;
       <p class="wellcome" *ngIf="app_state.token">{{app_state.first_name}}</p>
-
+<!-- *ngIf="app_state.token" -->
       <div class="spacer"></div>
-      <button  [routerLink]="['']" mat-button>Home</button>
-      <button *ngIf="app_state.token" [routerLink]="['/items/create']" mat-button>Create</button>
-      <button *ngIf="app_state.token"  [routerLink]="['/items/views']" mat-button>View</button>
+      <button  [routerLink]="['/items/views']" mat-button>Home</button>
+      <button  [routerLink]="['/items/create']" mat-button>Create</button>
+      <!-- <button   [routerLink]="['/items/views']" mat-button>View</button> -->
       <button *ngIf="!app_state.token" [routerLink]="['register']" mat-raised-button color="green" >signup</button>
       &nbsp;
       <button *ngIf="!app_state.token" [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
@@ -38,7 +38,7 @@ import { UserService } from './user.service';
   `,
   styles: [
     `
-   
+
       .spacer {
         flex: 1 1 auto;
       }
@@ -70,21 +70,21 @@ export class AppComponent implements OnInit {
     email: "",
     phone_number: "",
     token:""
-    
-    
+
+
   }
-  
+
   title = 'Lost_and_found';
   constructor(private userService: UserService, private router: Router) {
-    
-    
+
+
     const stringified_app_state = localStorage.getItem("APP_STATE")
-  
-    
+
+
     if (stringified_app_state) {
       const parsed_app_state=JSON.parse(stringified_app_state)
       this.userService.userState.next(parsed_app_state)
-      
+
       this.app_state = parsed_app_state;
      ;
     }
@@ -92,9 +92,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userState.subscribe((state: User) => {
       this.app_state = state;
-      
 
-      
+
+
     })
   }
   logout() {
@@ -108,8 +108,8 @@ export class AppComponent implements OnInit {
     })
     localStorage.clear();
     this.router.navigate(["login"])
-   
-    
+
+
   }
 }
 
@@ -136,7 +136,7 @@ export class AppComponent implements OnInit {
 //   width: 100%;
 //   position: absolute;
 // }
-  
+
 //   `]
 // })
 // export class AppComponent {

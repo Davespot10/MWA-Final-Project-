@@ -24,8 +24,8 @@ import { ItemService } from './item.service';
           <a routerLink="/items/{{ item._id}}">
             <mat-card class="item-card mat-elevation-z4">
               <mat-card-header class="card-container">
-                <mat-card-title>{{ item.postType }}</mat-card-title>
-                <mat-card-subtitle>{{ item.itemType }}</mat-card-subtitle>
+                <mat-card-title>{{ item.lat }}</mat-card-title>
+                <mat-card-subtitle>{{ item.lng }}</mat-card-subtitle>
               </mat-card-header>
               <mat-card-content>
                 <div class="post-item">

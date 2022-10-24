@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'items',
     loadChildren: () =>
       import('./items/item.module').then(mod => mod.ItemModule),
-    canActivate:[CheckTokenGuard]!
+    // canActivate:[CheckTokenGuard]!
   },
 ];
 

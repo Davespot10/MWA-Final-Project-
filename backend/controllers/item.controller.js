@@ -34,12 +34,13 @@ const postItems = async (req, res, next) => {
 
     const data = await  s3.upload(params).promise();
     
-    // const result = await locationCalculator(address);
+    const result = await locationCalculator(address);
 
-    // let latitude = result.lat;
-    // let longitude = result.lng;
-    let latitude = 2040;
-    let longitude = 30694;
+    console.log("Result is " , result);
+    let latitude = result.lat;
+    let longitude = result.lng;
+    // let latitude = 2040;
+    // let longitude = 30694;
 
     let post = {
       itemType: req.body.itemType,
