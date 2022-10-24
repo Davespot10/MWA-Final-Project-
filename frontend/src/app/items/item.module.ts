@@ -17,6 +17,7 @@ import { ItemComponent } from './item.component';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details.component';
 import {MatGridListModule } from '@angular/material/grid-list';
+import { CheckTokenGuard } from '../protect.guard';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -39,7 +40,8 @@ const ItemsComponents = [
     RouterModule.forChild([
       {
         path: 'items/create', component: PostComponent,
-        title: "Creat LF"
+        title: "Creat LF",
+        canActivate:[CheckTokenGuard]!
       },
       {
         path: '', component: ItemComponent,
@@ -48,7 +50,8 @@ const ItemsComponents = [
       },
       {
         path: 'items/:id', component: DetailsComponent,
-        title: "Item Description"
+        title: "Item Description",
+       
       }
       // more lazy loading to be included here
 

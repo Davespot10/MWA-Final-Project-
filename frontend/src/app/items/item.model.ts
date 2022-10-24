@@ -11,5 +11,7 @@ export interface Item {
   firstName:string;
   lastName:string;
   email:string;
-  phone:string
+  phone: string
+  lat: number;
+  lng:number
 }

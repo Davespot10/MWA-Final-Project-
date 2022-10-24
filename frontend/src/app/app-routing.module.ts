@@ -8,12 +8,7 @@ import { CheckTokenGuard } from './protect.guard';
 import { RegisterComponent } from './register.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: HomeComponent,
-  //   title: "Home",
-  //   pathMatch: 'full',
-  // },
+
   {
     path: 'login',
     component: LoginComponent,
