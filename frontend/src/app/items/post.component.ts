@@ -3,7 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemService } from 'src/app/items/item.service';
 import { Item } from 'src/app/items/item.model';
-import { PlaceSuggestion } from '../address-auto-complete.component';
+import { PlaceSuggestion } from '../items/PlaceSuggestion';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-post',
   template: `<mat-stepper orientation="vertical" [linear]="true" #stepper>
@@ -60,7 +61,7 @@ import { PlaceSuggestion } from '../address-auto-complete.component';
     </mat-step>
 
     <mat-step [stepControl]="itemAddressFormGroup">
-      <form [formGroup]="itemAddressFormGroup">
+      <form>
         <ng-template matStepLabel>Location of Lost/Found </ng-template>
         <div fxLayout="row wrap" fxLayoutGap.gt-lg="16px grid">
           <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
@@ -212,6 +213,7 @@ import { PlaceSuggestion } from '../address-auto-complete.component';
 export class PostComponent implements OnInit, OnDestroy {
   submit = false;
   selectFiles = '';
+  address = 'Maharishi university address ';
   lat = 224455;
   lng = 102030;
   ownerId = 20;
@@ -244,7 +246,7 @@ export class PostComponent implements OnInit, OnDestroy {
   });
 
   itemAddressFormGroup = this.fb.group({
-    address: ['', [Validators.required]],
+    address: [''],
   });
   userInfoFormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -256,7 +258,8 @@ export class PostComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private itemService: ItemService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   postItem() {
@@ -266,7 +269,7 @@ export class PostComponent implements OnInit, OnDestroy {
       postType: this.itemDetailsFormGroup.value.postType as string,
       description: this.itemDetailsFormGroup.value.description as string,
       imageUrl: this.selectFiles,
-     address:this.itemAddressFormGroup.value.address,
+      address: this.address,
       firstName: this.userInfoFormGroup.value.firstName as string,
       lastName: this.userInfoFormGroup.value.lastName as string,
       email: this.userInfoFormGroup.value.email as string,
@@ -277,9 +280,9 @@ export class PostComponent implements OnInit, OnDestroy {
     } as Item;
 
     this.itemService.postItem(item).subscribe((result) => {
-      // this.snackBar.open('Item posted successfully ' ,' ',{
-      //   duration:1000
-      // });
+      this._snackBar.open('Item posted successfully ' ,' ',{
+        duration:1000
+      });
       console.log(result);
       this.router.navigateByUrl('/');
       this.submit = false;
@@ -300,7 +303,8 @@ export class PostComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
   autocompleteChanged(value: PlaceSuggestion) {
-
+    this.address = value.shortAddress
+    console.log('value is changing here',this.address );
   }
 
   ngOnInit(): void {}

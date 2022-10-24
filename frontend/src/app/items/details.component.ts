@@ -4,75 +4,69 @@ import { Subscription } from 'rxjs';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
 
-
 @Component({
   selector: 'app-details',
   template: `
-
-<mat-card>
-      <mat-card-content>
+  <div>
     <div>
-      <div>
-          <hr>
-          <h1 >Item Informations</h1>
+    <mat-card>
+      <mat-card-content>
+        <div>
+          <div>
+            <hr />
+            <h1>Item Informations</h1>
 
-    
-        <label class="titles">Post Type:</label>
-        <label>{{ item.postType }}</label>
-        <div class="spacer"></div>
-        <br>
-    
-      
-        <label class="titles">Item Type:-</label>
-        <label>{{ item.itemType }}</label>
-        <div class="spacer"></div>
-        <br>
-        <label class="titles">Item Decription:-</label>
-        <label >{{ item.description }}</label>
-        
-        
-        <div class="spacer"></div>
-        <br>
-        <label class="titles">Item Type:-</label>
-        <label>{{ item.description }}</label>
-        <div class="spacer"></div>
-        <br>
-        <label class="titles">Item Image:-</label>
+            <label class="titles">Post Type:</label>
+            <label>{{ item.postType }}</label>
+            <div class="spacer"></div>
+            <br />
 
-        
-        
-        
-        <div class="spacer"></div>
-          <br>
-        <br>
-        <mat-card-content>
-         <mat-card>
-            <img src="{{item.imageUrl}}" alt="{{ item.itemType }}">
+            <label class="titles">Item Type:-</label>
+            <label>{{ item.itemType }}</label>
+            <div class="spacer"></div>
+            <br />
+            <label class="titles">Item Decription:-</label>
+            <label>{{ item.description }}</label>
 
+            <div class="spacer"></div>
+            <br />
+            <label class="titles">Item Type:-</label>
+            <label>{{ item.description }}</label>
+            <div class="spacer"></div>
+            <br />
+            <label class="titles">Item Image:-</label>
 
+            <div class="spacer"></div>
+            <br />
+            <br />
+            <mat-card-content>
+              <mat-card>
+                <img
+                  src="{{ item.imageUrl }}"
+                  alt="{{ item.itemType }}"
+                /> </mat-card
+            ></mat-card-content>
+          </div></div></mat-card-content
+    ></mat-card>
+    </div>
 
-            
+  </div>
 
-
-  
-  
   `,
 
   styles: [
     `
-    .titles{
-      color:green
-    }
-    h1{
-      color:red
-    }
-    img{
+      .titles {
+        color: green;
+      }
+      h1 {
+        color: red;
+      }
+      img {
         max-width: 100rem;
         max-height: 15rem;
-        
-        
-    }     
-    .container {
+      }
+      .container {
         display: flex;
         flex-direction: row;
         flex-wrap: no-wrap;
@@ -83,39 +77,38 @@ import { ItemService } from './item.service';
         position: absolute;
         align-items: center;
       }
-     
     `,
   ],
 })
 export class DetailsComponent implements OnInit {
   item!: Item;
-  itmSub!: Subscription
+  itmSub!: Subscription;
   querySub!: Subscription;
   petSub!: Subscription;
   params?: any;
   itemId: string = '';
- 
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private itemService: ItemService,
-   
-   
+    private itemService: ItemService
   ) {
     activatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.itemService.getItemById(params['id']).subscribe((result) => {
           this.item = result;
-         
-          
         });
       }
     });
   }
-  mapsUrl(){
+  mapsUrl() {
     let latitude: string = this.item.lat as unknown as string;
-    let longtude: string = this.item.lng as unknown as string
-    let url = 'https://maps.google.com/maps?width=100%25&height=600&hl=en&q='+latitude+','+longtude+'&t=&z=14&ie=UTF8&iwloc=B&output=embed';
+    let longtude: string = this.item.lng as unknown as string;
+    let url =
+      'https://maps.google.com/maps?width=100%25&height=600&hl=en&q=' +
+      latitude +
+      ',' +
+      longtude +
+      '&t=&z=14&ie=UTF8&iwloc=B&output=embed';
     return url;
   }
 

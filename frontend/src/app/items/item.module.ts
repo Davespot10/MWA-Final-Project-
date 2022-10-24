@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details.component';
 import {MatGridListModule } from '@angular/material/grid-list';
 import { CheckTokenGuard } from '../protect.guard';
+import {  MatSnackBarModule } from '@angular/material/snack-bar';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -25,6 +26,7 @@ const ItemsComponents = [
   MatCardModule,
   MatFormFieldModule,
   MatStepperModule,
+  MatSnackBarModule,
   MatInputModule,
   MatProgressBarModule,
   MatRadioModule,
@@ -51,7 +53,7 @@ const ItemsComponents = [
       {
         path: 'items/:id', component: DetailsComponent,
         title: "Item Description",
-       
+
       }
       // more lazy loading to be included here
 

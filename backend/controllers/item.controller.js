@@ -1,13 +1,10 @@
 const Item = require('../models/item');
 const { StatusCodes } = require('http-status-codes');
-const locationCalculator = require('../middleware/location');
-
 require('dotenv').config();
 
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
-
 
 //configuring the AWS environment
 
@@ -20,10 +17,9 @@ AWS.config.update({
 var s3 = new AWS.S3();
 
 const postItems = async (req, res, next) => {
-  const { state, city, street, zipcode } = req.body;
-  let address = street + ',' + city + ',' + state + ' ' + zipcode;
-  
-  const fileStream = fs.createReadStream(path.join(__dirname,'..','uploads',req.body.imageUrl));
+  const fileStream = fs.createReadStream(
+    path.join(__dirname, '..', 'uploads', req.body.imageUrl)
+  );
   try {
     var params = {
       Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -32,14 +28,6 @@ const postItems = async (req, res, next) => {
     };
 
     const data = await s3.upload(params).promise();
-    
-    // const result = await locationCalculator(address);
-
-    // console.log("Result is " , result);
-    // let latitude = result.lat;
-    // let longitude = result.lng;
-    let latitude = 2040;
-    let longitude = 30694;
 
     let post = {
       itemType: req.body.itemType,
@@ -47,8 +35,7 @@ const postItems = async (req, res, next) => {
       description: req.body.description,
       imageUrl: data.Location,
       date: req.body.date,
-      lat: latitude,
-      lng: longitude,
+      address: req.body.address,
       'owner.firsName': req.body.firstName,
       'owner.lastName': req.body.lastName,
       'owner.email': req.body.email,
@@ -56,14 +43,15 @@ const postItems = async (req, res, next) => {
     };
 
     const item = await Item.create(post);
+    if (item) {
+      fs.unlink(path.join(__dirname, '..', 'uploads', req.body.imageUrl));
+    }
 
     res.status(StatusCodes.CREATED).json(item);
   } catch (error) {
     res.json({ error });
   }
 };
-
-
 
 const getItems = async (req, res, next) => {
   try {
@@ -74,8 +62,6 @@ const getItems = async (req, res, next) => {
   }
 };
 
-
-
 const getItemById = async (req, res, next) => {
   try {
     const item = await Item.findById(req.params.id);
@@ -84,7 +70,6 @@ const getItemById = async (req, res, next) => {
     res.json({ error });
   }
 };
-
 
 const updateItemById = async (req, res, next) => {
   try {

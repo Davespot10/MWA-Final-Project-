@@ -3,7 +3,8 @@ import { Subject, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatOptionSelectionChange } from '@angular/material/core';
-
+import { PlaceSuggestion } from './items/PlaceSuggestion';
+import {GeocodingFeatureProperties} from './items/GeocodingFeatureProperties'
 @Component({
   selector: 'app-autocomplete',
   template: ` <mat-form-field class="auto-complete">
@@ -22,7 +23,7 @@ import { MatOptionSelectionChange } from '@angular/material/core';
         [value]="option.shortAddress"
         (onSelectionChange)="optionSelectionChange(option, $event)"
         [matTooltip]="option.fullAddress"
-        matTooltipShowDelay="1000"
+        matTooltipShowDelay="5000"
       >
         <span class="mat-body">{{ option.shortAddress }}</span>
       </mat-option>
@@ -170,18 +171,5 @@ export class AddressAutoCompleteComponent implements OnDestroy {
   }
 }
 
-export interface PlaceSuggestion {
-  shortAddress: string;
-  fullAddress: string;
-  data: GeocodingFeatureProperties;
-}
 
-interface GeocodingFeatureProperties {
-  name: string;
-  country: string;
-  state: string;
-  postcode: string;
-  city: string;
-  street: string;
-  housenumber: string;
-}
+

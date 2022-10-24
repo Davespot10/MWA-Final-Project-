@@ -22,6 +22,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     NotFoundComponent,
     SearchPipe,
     HeaderComponent,
-    AddressAutoCompleteComponent
+    AddressAutoCompleteComponent,
+
 
 
   ],
