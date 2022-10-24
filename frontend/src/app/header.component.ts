@@ -20,11 +20,11 @@ import { UserService } from './user.service';
 
       <div class="spacer"></div>
       <button  [routerLink]="['']" mat-button>Home</button>
-      <button  [routerLink]="['/items/create']" mat-button>Create</button>
+      <button *ngIf="app_state.token" [routerLink]="['login']" [routerLink]="['/items/create']" mat-button>Create</button>
 
       <button  [routerLink]="['register']" mat-raised-button color="green" >signup</button>
       &nbsp;
-      <button * [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
+      <button *ngIf="!app_state.token" [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
       &nbsp;
       <button *ngIf="app_state.token" mat-raised-button (click)="logout()" >Logout</button>
 
