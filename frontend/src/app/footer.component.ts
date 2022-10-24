@@ -5,10 +5,16 @@ import { UserService } from './user.service';
 @Component({
   selector: 'app-footer',
   template: `
-  <mat-toolbar color="primary" class="">
+  <mat-toolbar color="primary" class="footer">
       
-      <span class="footer">All rights reserved-L&F</span>
-
+      <a [routerLink]="['']" routerLink="" class="about">
+      <span >About us</span>
+      </a>
+      <span class="footer-text">All rights reserved-L&F</span>
+     
+      <a [routerLink]="['']" routerLink="" class="contact">
+      <span >Contact</span>
+      </a>
       <div class="spacer"></div>
 
     </mat-toolbar>
@@ -22,17 +28,41 @@ import { UserService } from './user.service';
       .spacer {
         flex: 1 1 auto;
       }
-      .ecology {
-        transform: scale(3);
-      }
+     
       .footer {
-      font-family: 'Pacifico', cursive;
-      font-weight: bold;
-      margin-left: 5px;
+     
       position: absolute;
       bottom: 0;
+     
+    }
+
+    .footer-text{
+      font-family: 'Pacifico', cursive;
+      font-size: 12px;
+      margin-left: 580px;
+      position: absolute;
+      bottom: 5;
       color:yellow
     }
+    
+    .about{
+      font-family: 'Pacifico', cursive;
+      font-weight: bold;
+      margin-left: 250px;
+      position: absolute;
+      bottom: 5;
+      color:white
+    }
+
+    .contact{
+      font-family: 'Pacifico', cursive;
+      font-weight: bold;
+      margin-left: 950px;
+      position: absolute;
+      bottom: 5;
+      color:white
+    }
+    
    
     `,
   ],
