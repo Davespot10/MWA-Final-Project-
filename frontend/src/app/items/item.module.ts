@@ -38,12 +38,13 @@ const ItemsComponents = [
   imports: [ItemsComponents,
     RouterModule.forChild([
       {
-        path: 'create', component: PostComponent,
+        path: 'items/create', component: PostComponent,
         title: "Creat LF"
       },
       {
-        path: 'views', component: ItemComponent,
-        title: "View LF"
+        path: '', component: ItemComponent,
+        title: "View LF",
+        pathMatch: 'full'
       },
       {
         path: 'items/:id', component: DetailsComponent,

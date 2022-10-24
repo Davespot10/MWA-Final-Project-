@@ -100,7 +100,6 @@ export class ItemComponent implements OnInit {
     this.itemService.getItems().subscribe({
       next: (result: Item[]) => {
         this.items = result;
-        console.log(result);
       },
       error: (err: any) => {
         console.log(err);

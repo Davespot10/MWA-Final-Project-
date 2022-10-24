@@ -32,7 +32,7 @@ const postItems = async (req, res, next) => {
       Key: 'laf/' + Date.now() + '_' + path.basename(req.body.imageUrl),
     };
 
-    const data = await  s3.upload(params).promise();
+    const data = await s3.upload(params).promise();
     
     const result = await locationCalculator(address);
 

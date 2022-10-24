@@ -15,6 +15,7 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { SearchPipe } from './search.pipe';
 import { ItemModule } from './items/item.module';
+import { HeaderComponent } from './header.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ItemModule } from './items/item.module';
     RegisterComponent,
     PostComponent,
     NotFoundComponent,
-    SearchPipe
+    SearchPipe,
+    HeaderComponent
 
 
   ],
