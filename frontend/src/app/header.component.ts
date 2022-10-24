@@ -20,11 +20,11 @@ import { UserService } from './user.service';
 
       <div class="spacer"></div>
       <button  [routerLink]="['']" mat-button>Home</button>
-      <button *ngIf="app_state.token" [routerLink]="['/items/create']" mat-button>Create</button>
-  
-      <button *ngIf="!app_state.token" [routerLink]="['register']" mat-raised-button color="green" >signup</button>
+      <button  [routerLink]="['/items/create']" mat-button>Create</button>
+
+      <button  [routerLink]="['register']" mat-raised-button color="green" >signup</button>
       &nbsp;
-      <button *ngIf="!app_state.token" [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
+      <button * [routerLink]="['login']" mat-raised-button color="green" >logIn</button>
       &nbsp;
       <button *ngIf="app_state.token" mat-raised-button (click)="logout()" >Logout</button>
 
@@ -36,7 +36,7 @@ import { UserService } from './user.service';
   `,
   styles: [
     `
-   
+
       .spacer {
         flex: 1 1 auto;
       }
@@ -59,7 +59,7 @@ import { UserService } from './user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  
+
 
   app_state: User = {
     _id: "",
@@ -68,21 +68,21 @@ export class HeaderComponent implements OnInit {
     email: "",
     phone_number: "",
     token:""
-    
-    
+
+
   }
-  
+
   title = 'Lost_and_found';
   constructor(private userService: UserService, private router: Router) {
-    
-    
+
+
     const stringified_app_state = localStorage.getItem("APP_STATE")
-  
-    
+
+
     if (stringified_app_state) {
       const parsed_app_state=JSON.parse(stringified_app_state)
       this.userService.userState.next(parsed_app_state)
-      
+
       this.app_state = parsed_app_state;
      ;
     }
@@ -90,9 +90,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userState.subscribe((state: User) => {
       this.app_state = state;
-      
 
-      
+
+
     })
   }
   logout() {
@@ -106,8 +106,8 @@ export class HeaderComponent implements OnInit {
     })
     localStorage.clear();
     this.router.navigate(["login"])
-   
-    
+
+
   }
 
 }

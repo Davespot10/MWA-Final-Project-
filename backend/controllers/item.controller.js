@@ -10,6 +10,8 @@ const path = require('path');
 
 
 
+
+
 //configuring the AWS environment
 
 AWS.config.update({
@@ -23,30 +25,30 @@ var s3 = new AWS.S3();
 const postItems = async (req, res, next) => {
   const { state, city, street, zipcode } = req.body;
   let address = street + ',' + city + ',' + state + ' ' + zipcode;
-  let imgUrl;
-
+  // let imgUrl;
+  const fileStream = fs.createReadStream(path.join(__dirname,'..','uploads',req.body.imageUrl));
   try {
     var params = {
       Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Body: req.body.imageUrl,
+      Body: fileStream,
       Key: 'laf/' + Date.now() + '_' + path.basename(req.body.imageUrl),
     };
 
     const data = await s3.upload(params).promise();
     
-    const result = await locationCalculator(address);
+    // const result = await locationCalculator(address);
 
-    console.log("Result is " , result);
-    let latitude = result.lat;
-    let longitude = result.lng;
-    // let latitude = 2040;
-    // let longitude = 30694;
+    // console.log("Result is " , result);
+    // let latitude = result.lat;
+    // let longitude = result.lng;
+    let latitude = 2040;
+    let longitude = 30694;
 
     let post = {
       itemType: req.body.itemType,
       postType: req.body.postType,
       description: req.body.description,
-      imageUrl: "data.Location",
+      imageUrl: data.Location,
       date: req.body.date,
       lat: latitude,
       lng: longitude,

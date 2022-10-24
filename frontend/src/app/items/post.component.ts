@@ -229,7 +229,7 @@ import { Item } from 'src/app/items/item.model';
 })
 export class PostComponent implements OnInit, OnDestroy {
   submit = false;
-  selectFiles='';
+  selectFiles = '';
   lat = 224455;
   lng = 102030;
   ownerId = 20;
@@ -278,8 +278,6 @@ export class PostComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private itemService: ItemService,
     private router: Router
-
-
   ) {}
 
   postItem() {
@@ -312,10 +310,14 @@ export class PostComponent implements OnInit, OnDestroy {
     });
   }
   upload(event: any) {
+    const file = event.target.files[0];
+    this.selectFiles = file.name;
+    return this.itemService.uploadImage(file).subscribe((item) => {
+      console.log('My File name is ', file.name);
+    });
+    this.selectFiles = event.target.files[0].name;
 
-  const files = event.target.files[0];
-
- this.selectFiles = files.name;
+    //  this.selectFiles = files.name;
   }
   ngOnDestroy(): void {
     // cleanup and un subscription to be done here

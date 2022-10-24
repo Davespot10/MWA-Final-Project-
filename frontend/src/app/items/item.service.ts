@@ -33,5 +33,10 @@ export class ItemService {
     return this.http.delete<Item>(this.BASE_URL);
 
   }
+  uploadImage(file:File):Observable<File>{
+    const formData:FormData = new FormData();
+    formData.append("imageUrl", file, file.name);
+    return this.http.post<File>(this.BASE_URL+'/img', formData);
+  }
 
 }
