@@ -7,12 +7,12 @@ import { CheckTokenGuard } from './protect.guard';
 import { RegisterComponent } from './register.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    title: "Home",
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   component: HomeComponent,
+  //   title: "Home",
+  //   pathMatch: 'full',
+  // },
   {
     path: 'login',
     component: LoginComponent,
@@ -24,7 +24,7 @@ const routes: Routes = [
     title: "Signup",
   },
   {
-    path: 'items',
+    path: '',
     loadChildren: () =>
       import('./items/item.module').then(mod => mod.ItemModule),
     canActivate:[CheckTokenGuard]!

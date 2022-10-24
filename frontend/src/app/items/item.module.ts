@@ -12,7 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RouterModule } from '@angular/router';
 import { PostComponent } from './post.component';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemComponent } from './item.component';
 import { FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details.component';
@@ -29,7 +29,7 @@ const ItemsComponents = [
   MatRadioModule,
   FormsModule,
   MatSelectModule,
-  // FlexLayoutModule,
+  FlexLayoutModule,
   MaterialFileInputModule,
   MatGridListModule
 ];
@@ -38,12 +38,13 @@ const ItemsComponents = [
   imports: [ItemsComponents,
     RouterModule.forChild([
       {
-        path: 'create', component: PostComponent,
+        path: 'items/create', component: PostComponent,
         title: "Creat LF"
       },
       {
-        path: 'views', component: ItemComponent,
-        title: "View LF"
+        path: '', component: ItemComponent,
+        title: "View LF",
+        pathMatch: 'full'
       },
       {
         path: 'items/:id', component: DetailsComponent,

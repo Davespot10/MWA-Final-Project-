@@ -21,11 +21,11 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
-<<<<<<< HEAD
-    "aws-sdk": "^2.1238.0",
-=======
+
+    
+
     "jwt-decode": "^3.1.2",
->>>>>>> 0591b3cb0772a95c691d34a3404e1ca89efd2e87
+
     "ngx-material-file-input": "^4.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
