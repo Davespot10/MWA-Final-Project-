@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FooterComponent } from './footer.component';
 import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { CheckTokenGuard } from './protect.guard';
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    title: "Signup",
+  },
+  {
+    path: 'footer',
+    component: FooterComponent,
     title: "Signup",
   },
   {

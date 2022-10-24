@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
 
+
 @Component({
   selector: 'app-details',
   template: `
@@ -23,6 +24,7 @@ import { ItemService } from './item.service';
         />
       </div>
     </div>
+    
   `,
 
   styles: [
