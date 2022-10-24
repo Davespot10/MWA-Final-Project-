@@ -4,10 +4,7 @@ export interface Item {
   postType:string;
   description:string;
   imageUrl:string;// to be converted to array
-  state:string;
-  city:string;
-  street:string;
-  zipcode:string;
+  address:string;
   firstName:string;
   lastName:string;
   email:string;

@@ -16,8 +16,10 @@ import { RegisterComponent } from './register.component';
 import { SearchPipe } from './search.pipe';
 import { ItemModule } from './items/item.module';
 import { HeaderComponent } from './header.component';
-import { GoogleMapsModule } from '@angular/google-maps'
-
+import { GoogleMapsModule } from '@angular/google-maps';
+import { AddressAutoCompleteComponent } from './address-auto-complete.component'
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     PostComponent,
     NotFoundComponent,
     SearchPipe,
-    HeaderComponent
+    HeaderComponent,
+    AddressAutoCompleteComponent
 
 
   ],
@@ -46,7 +49,9 @@ import { GoogleMapsModule } from '@angular/google-maps'
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    MatTooltipModule,
+    MatAutocompleteModule
 
   ],
   providers: [],

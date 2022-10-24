@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemService } from 'src/app/items/item.service';
 import { Item } from 'src/app/items/item.model';
+import { PlaceSuggestion } from '../address-auto-complete.component';
 @Component({
   selector: 'app-post',
   template: `<mat-stepper orientation="vertical" [linear]="true" #stepper>
@@ -57,45 +58,19 @@ import { Item } from 'src/app/items/item.model';
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="itemAddressFormGroup">
       <form [formGroup]="itemAddressFormGroup">
         <ng-template matStepLabel>Location of Lost/Found </ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>state</mat-label>
-          <input
-            matInput
-            placeholder="Ex. IOWA"
-            formControlName="state"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>City</mat-label>
-          <input
-            matInput
-            placeholder="Ex. Fairfield"
-            formControlName="city"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Street</mat-label>
-          <input
-            matInput
-            placeholder="Ex. 1000Nth street"
-            formControlName="street"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Zip Code</mat-label>
-          <input
-            matInput
-            placeholder="Ex. 557525"
-            formControlName="zipcode"
-            required
-          />
-        </mat-form-field>
+        <div fxLayout="row wrap" fxLayoutGap.gt-lg="16px grid">
+          <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <app-autocomplete
+              class="autocomplete"
+              (locationChange)="autocompleteChanged($event)"
+            ></app-autocomplete>
+          </div>
+        </div>
+
         <div>
           <button
             mat-raised-button
@@ -220,6 +195,13 @@ import { Item } from 'src/app/items/item.model';
         width: 40%;
         padding: 10px;
       }
+      .auto-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
       .stepper-btn {
         margin-right: 10px;
         padding-right: 10px;
@@ -262,10 +244,7 @@ export class PostComponent implements OnInit, OnDestroy {
   });
 
   itemAddressFormGroup = this.fb.group({
-    state: ['', [Validators.required]],
-    city: ['', [Validators.required]],
-    street: ['', [Validators.required]],
-    zipcode: ['', [Validators.required]], // to be validated Validators.pattern('(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)')]
+    address: ['', [Validators.required]],
   });
   userInfoFormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -287,10 +266,7 @@ export class PostComponent implements OnInit, OnDestroy {
       postType: this.itemDetailsFormGroup.value.postType as string,
       description: this.itemDetailsFormGroup.value.description as string,
       imageUrl: this.selectFiles,
-      state: this.itemAddressFormGroup.value.state as string,
-      city: this.itemAddressFormGroup.value.city as string,
-      street: this.itemAddressFormGroup.value.street as string,
-      zipcode: this.itemAddressFormGroup.value.zipcode as string,
+     address:this.itemAddressFormGroup.value.address,
       firstName: this.userInfoFormGroup.value.firstName as string,
       lastName: this.userInfoFormGroup.value.lastName as string,
       email: this.userInfoFormGroup.value.email as string,
@@ -322,6 +298,9 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // cleanup and un subscription to be done here
     throw new Error('Method not implemented.');
+  }
+  autocompleteChanged(value: PlaceSuggestion) {
+
   }
 
   ngOnInit(): void {}
