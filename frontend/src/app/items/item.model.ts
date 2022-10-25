@@ -1,3 +1,5 @@
+import { ItemLocation } from "./location";
+
 export interface Item {
   _id?:string;
   itemType:string;
@@ -9,6 +11,6 @@ export interface Item {
   lastName:string;
   email:string;
   phone: string
-  lat: number;
-  lng:number
+  location:ItemLocation;
+
 }

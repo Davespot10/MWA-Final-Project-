@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
+import { MapService } from './map.service';
+
 @Component({
   selector: 'app-item',
   template: `
@@ -22,7 +24,7 @@ import { ItemService } from './item.service';
           fxFlex.sm="50%"
           *ngFor="let item of items | searchText: searchItems"
         >
-          <a routerLink="/items/{{ item._id }}">
+          <a routerLink="/items/{{ item._id }}" (onclick)="handleSubject()">
             <mat-card class="item-card mat-elevation-z4">
               <mat-card-header class="card-container">
                 <mat-card-title>{{ item.postType }}</mat-card-title>
@@ -93,7 +95,7 @@ import { ItemService } from './item.service';
 export class ItemComponent implements OnInit {
   items: Item[] = [];
   searchItems: string = '';
-  constructor(private itemService: ItemService) {}
+  constructor(private itemService: ItemService,private mapService:MapService) {}
 
   ngOnInit(): void {
     this.getAllItems();
@@ -108,5 +110,8 @@ export class ItemComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  handleSubject(){
+    // this.mapService.currentLocation.next()
   }
 }

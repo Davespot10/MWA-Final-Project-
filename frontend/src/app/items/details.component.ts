@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
 import { MapComponent } from './map.component';
+import { MapService } from './map.service';
 
 @Component({
   selector: 'app-details',
@@ -103,7 +104,9 @@ export class DetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private itemService: ItemService
+    private itemService: ItemService,
+    public mapService:MapService
+
   ) {
     activatedRoute.params.subscribe((params) => {
       if (params['id']) {
@@ -113,17 +116,8 @@ export class DetailsComponent implements OnInit {
       }
     });
   }
-  mapsUrl() {
-    let latitude: string = this.item.lat as unknown as string;
-    let longtude: string = this.item.lng as unknown as string;
-    let url =
-      'https://maps.google.com/maps?width=100%25&height=600&hl=en&q=' +
-      latitude +
-      ',' +
-      longtude +
-      '&t=&z=14&ie=UTF8&iwloc=B&output=embed';
-    return url;
+  ngOnInit(): void {
+    this.mapService.changeLocation(this.item.location);
+    console.log("mapService ");
   }
-
-  ngOnInit(): void {}
 }
