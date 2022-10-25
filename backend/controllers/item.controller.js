@@ -6,8 +6,6 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 
-//configuring the AWS environment
-
 AWS.config.update({
   accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
@@ -39,7 +37,6 @@ const postItems = async (req, res, next) => {
       Key: 'laf/' + Date.now() + '_' + path.basename(req.body.imageUrl),
     };
 
-    console.log(req.body);
     const data = await s3.upload(params).promise();
 
     let post = {
@@ -55,12 +52,10 @@ const postItems = async (req, res, next) => {
       'owner.email': req.body.email,
       'owner.phone': req.body.phone,
     };
-    console.log("Post object is ", post);
+ 
 
     const item = await Item.create(post);
-    // if (item) {
-    //   fs.unlink(path.join(__dirname, '..', 'uploads', req.body.imageUrl));
-    // }
+    
 
     res.status(StatusCodes.CREATED).json(item);
   } catch (error) {
