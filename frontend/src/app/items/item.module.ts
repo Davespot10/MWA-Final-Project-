@@ -19,6 +19,7 @@ import { DetailsComponent } from './details.component';
 import {MatGridListModule } from '@angular/material/grid-list';
 import { CheckTokenGuard } from '../protect.guard';
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
+import { MapComponent } from './map.component';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -61,8 +62,8 @@ const ItemsComponents = [
   ],
   exports: [ItemsComponents],
   declarations: [
-
-    DetailsComponent
+    DetailsComponent,
+    MapComponent
   ],
 })
 export class ItemModule {

@@ -20,14 +20,12 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { AddressAutoCompleteComponent } from './address-auto-complete.component'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import { MapComponent } from './items/map.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
-
     FooterComponent,
     HomeComponent,
     LoginComponent,
@@ -43,6 +41,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -54,6 +53,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     GoogleMapsModule,
     MatTooltipModule,
     MatAutocompleteModule
+
 
   ],
   providers: [],

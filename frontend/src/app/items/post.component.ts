@@ -276,7 +276,7 @@ export class PostComponent implements OnInit, OnDestroy {
       phone: this.userInfoFormGroup.value.phone as string,
       lat: this.lat as number,
       lng: this.lng as number,
-      ownerId: this.ownerId as number,
+     
     } as Item;
 
     this.itemService.postItem(item).subscribe((result) => {
