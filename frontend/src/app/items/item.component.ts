@@ -19,12 +19,17 @@ import { ItemService } from './item.service';
           fxFlex="33%"
           fxFlex.xs="100%"
           fxFlex.sm="50%"
-          *ngFor="let item of items | searchText: searchItems"
+          *ngFor="let item of items | searchText: searchItems "
+        
         >
+        
           <a routerLink="/items/{{ item._id}}">
             <mat-card class="item-card mat-elevation-z4">
               <mat-card-header class="card-container">
-                <mat-card-title>{{ item.postType }}</mat-card-title>
+               
+              
+              
+              <mat-card-title>{{ item.postType }}</mat-card-title>
                 <mat-card-subtitle>{{ item.itemType }}</mat-card-subtitle>
               </mat-card-header>
               <mat-card-content>
@@ -100,10 +105,23 @@ export class ItemComponent implements OnInit {
     this.itemService.getItems().subscribe({
       next: (result: Item[]) => {
         this.items = result;
+        this.items.sort(this.compare);
       },
       error: (err: any) => {
         console.log(err);
+        
       },
     });
+  }
+
+
+   compare( a:Item, b:Item ) {
+    if ( b.postType < a.postType ){
+      return -1;
+    }
+    if ( b.postType > a.postType ){
+      return 1;
+    }
+    return 0;
   }
 }
