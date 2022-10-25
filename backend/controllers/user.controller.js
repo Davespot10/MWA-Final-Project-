@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { StatusCodes } = require('http-status-codes');
+const { StatusCodes } = require("http-status-codes");
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -9,9 +9,8 @@ module.exports.login = async (req, res, next) => {
 
     const user = await User.findOne({ email: email });
     if (user) {
-      
       const check_password = await bcrypt.compare(password, user.password);
-      
+
       if (check_password) {
         const token = jsonwebtoken.sign(
           {
@@ -25,12 +24,9 @@ module.exports.login = async (req, res, next) => {
         );
         res.status(StatusCodes.OK).json({ success: true, data: token });
         console.log("here");
-      }
-      else {
+      } else {
         throw new Error("Wrong Password Try Again");
-        
       }
-
     } else {
       throw new Error("Couldn't find your Lost_and_Found account");
     }
@@ -54,75 +50,59 @@ module.exports.signup = async (req, res, next) => {
         phone_number,
       });
 
-
-      res.status(StatusCodes.CREATED).json({ success:true});
+      res.status(StatusCodes.CREATED).json({ success: true });
     } else {
       res.status(409).json({ message: "User Already Exit" });
     }
   } catch (e) {
     next(e);
   }
-
 };
 module.exports.getAllUsers = async (req, res, next) => {
   try {
-    const result = await User.find({})
-    
-    res.status(StatusCodes.OK).json({result})
-    
-  }
-  catch (e) {
-    res.json({err:e.message})
-    
-    
-  }
+    const result = await User.find({});
 
-}
+    res.status(StatusCodes.OK).json({ result });
+  } catch (e) {
+    res.json({ err: e.message });
+  }
+};
 module.exports.getUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    const result=await User.findById(user_id)
-    res.status(StatusCodes.OK).json({result})
-    
+    const result = await User.findById(user_id);
+    res.status(StatusCodes.OK).json({ result });
+  } catch (e) {
+    res.json({ error: e.message });
   }
-  catch(e) {
-    res.json({error:e.message})
-    
-  }
-
-}
+};
 module.exports.deletUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    const result = await User.findByIdAndDelete(user_id)
-    res.status(StatusCodes.OK).json({success:true,result:"Item Delated Succesfully"})
-    
+    const result = await User.findByIdAndDelete(user_id);
+    res
+      .status(StatusCodes.OK)
+      .json({ success: true, result: "Item Delated Succesfully" });
+  } catch (e) {
+    res.json({ error: e.message });
   }
-  catch(e) {
-    res.json({error:e.message})
-    
-  }
-
-}
+};
 module.exports.editUserById = async (req, res, next) => {
   try {
     const { user_id } = req.params;
     const new_user = req.body;
     const result = await User.findByIdAndUpdate({ _id: user_id }, new_user);
     if (result) {
-      res.status(StatusCodes.OK).json({ success: true, result: "User information Updated Succesfully" })
+      res
+        .status(StatusCodes.OK)
+        .json({
+          success: true,
+          result: "User information Updated Succesfully",
+        });
+    } else {
+      throw new Error("User Not Found on the Given Id  ");
     }
-    else {
-      throw new Error("User Not Found on the Given Id  ")
-    }
-    
+  } catch (e) {
+    res.json({ error: e.message });
   }
-  catch (e) {
-    res.json({error:e.message})
-    
-  }
-
-}
-
-
-
+};

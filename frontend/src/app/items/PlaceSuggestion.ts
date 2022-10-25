@@ -1,4 +1,4 @@
-import { GeocodingFeatureProperties } from "./GeocodingFeatureProperties";
+import { GeocodingFeatureProperties } from './GeocodingFeatureProperties';
 
 export interface PlaceSuggestion {
   shortAddress: string;

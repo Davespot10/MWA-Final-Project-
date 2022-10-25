@@ -1,28 +1,28 @@
-const mongoose = require('mongoose');
-const User = require('./user');
-const geocoder = require('../util/geocoder');
+const mongoose = require("mongoose");
+const User = require("./user");
+const geocoder = require("../util/geocoder");
 const ItemSchema = new mongoose.Schema(
   {
     itemType: {
       type: String,
       enum: [
-        'Electronics',
-        'Clothing',
-        'Mobile',
-        'ID Card',
-        'Jewelry',
-        'Keys',
-        'Pet',
-        'Bags',
-        'Luggage',
-        'Books',
-        'Others',
+        "Electronics",
+        "Clothing",
+        "Mobile",
+        "ID_Card",
+        "Jewelry",
+        "Keys",
+        "Pet",
+        "Bags",
+        "Luggage",
+        "Books",
+        "Others",
       ],
       required: true,
     },
     postType: {
       type: String,
-      enum: ['LOST', 'FOUND'],
+      enum: ["LOST", "FOUND"],
       require: true,
     },
 
@@ -44,11 +44,11 @@ const ItemSchema = new mongoose.Schema(
     location: {
       type: {
         type: String,
-        enum: ['Point'],
+        enum: ["Point"],
       },
       coordinates: {
         type: [Number],
-        index: '2dsphere',
+        index: "2dsphere",
       },
       formattedAddress: String,
     },
@@ -71,5 +71,4 @@ const ItemSchema = new mongoose.Schema(
   }
 );
 
-
-module.exports = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model("Item", ItemSchema);

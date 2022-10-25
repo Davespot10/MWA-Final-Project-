@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
+
 import { MapService } from './map.service';
 
 @Component({
   selector: 'app-details',
   template: `
     <div class="container">
-      <div class="item-card" >
+      <div class="item-card">
         <mat-card>
           <mat-card-content>
             <div>
@@ -64,9 +64,9 @@ import { MapService } from './map.service';
       h1 {
         color: red;
       }
-      .item-card{
-        width:35%;
-        margin-left:100px;
+      .item-card {
+        width: 35%;
+        margin-left: 100px;
       }
       img {
         max-width: 100rem;
@@ -81,11 +81,11 @@ import { MapService } from './map.service';
         position: relative;
         align-items: center;
       }
-      .map{
-        width:65%;
-        margin:30px;
-        margin-right:-50px;
-        padding:25px;
+      .map {
+        width: 65%;
+        margin: 30px;
+        margin-right: -50px;
+        padding: 25px;
       }
 
 
@@ -94,12 +94,6 @@ import { MapService } from './map.service';
 })
 export class DetailsComponent implements OnInit {
   item!: Item;
-  itmSub!: Subscription;
-  querySub!: Subscription;
-  petSub!: Subscription;
-  params?: any;
-  itemId: string = '';
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private itemService: ItemService,

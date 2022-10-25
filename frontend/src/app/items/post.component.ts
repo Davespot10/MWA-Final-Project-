@@ -5,6 +5,8 @@ import { ItemService } from 'src/app/items/item.service';
 import { Item } from 'src/app/items/item.model';
 import { PlaceSuggestion } from '../items/PlaceSuggestion';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import User from '../user.interface';
+import { UserService } from '../user.service';
 @Component({
   selector: 'app-post',
   template: `<mat-stepper orientation="vertical" [linear]="true" #stepper>
@@ -17,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             <mat-option value="Electronics">Electronics</mat-option>
             <mat-option value="Clothing">Clothing</mat-option>
             <mat-option value="Mobile">Mobile</mat-option>
-            <mat-option value="IdCards">ID Card</mat-option>
+            <mat-option value="ID_Card">ID Card</mat-option>
             <mat-option value="Jewelry">Jewelry</mat-option>
             <mat-option value="Keys">Keys</mat-option>
             <mat-option value="Pet">Pet</mat-option>
@@ -92,60 +94,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="userInfoFormGroup">
-      <form [formGroup]="userInfoFormGroup">
-        <ng-template matStepLabel>User Information </ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>First Name </mat-label>
-          <input
-            matInput
-            placeholder="Ex. John"
-            formControlName="firstName"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Last Name </mat-label>
-          <input
-            matInput
-            placeholder="Ex. Doe"
-            formControlName="lastName"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="Ex. john@example.com"
-            formControlName="email"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Phone</mat-label>
-          <input matInput placeholder="Ex. 4657896" formControlName="phone" />
-        </mat-form-field>
-        <div>
-          <button
-            mat-raised-button
-            color="primary"
-            matStepperPrevious
-            class="stepper-btn"
-          >
-            Back
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            matStepperNext
-            class="stepper-btn"
-          >
-            Next
-          </button>
-        </div>
-      </form>
-    </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are almost done, click submit to Finish</p>
@@ -208,22 +157,55 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class PostComponent implements OnInit, OnDestroy {
+  app_state: User = {
+    _id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    token: '',
+  };
+  constructor(
+    private fb: FormBuilder,
+    private itemService: ItemService,
+    private router: Router,
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) {
+    const stringified_app_state = localStorage.getItem('APP_STATE');
+
+    if (stringified_app_state) {
+      const parsed_app_state = JSON.parse(stringified_app_state);
+      this.userService.userState.next(parsed_app_state);
+
+      this.app_state = parsed_app_state;
+    }
+  }
+  ngOnInit(): void {
+    this.userService.userState.subscribe((state: User) => {
+      this.app_state = state;
+      console.log(this.app_state.email);
+    });
+  }
+
   submit = false;
   selectFiles = '';
   address = '';
   ITEM_TYPE = [
-    'Electronics',
-    'Clothing',
-    'Mobile',
-    'ID Card',
-    'Jewelry',
-    'Keys',
-    'Pet',
-    'Bags',
-    'Luggage',
-    'Books',
-    'Others',
-  ];
+
+    "Electronics",
+    "Clothing",
+    "Mobile",
+    "ID_Card",
+    "Jewelry",
+    "Keys",
+    "Pet",
+    "Bags",
+    "Luggage",
+    "Books",
+    "Others",
+  ]
+
   POST_TYPE = ['LOST', 'FOUND'];
 
   itemDetailsFormGroup = this.fb.group({
@@ -243,12 +225,6 @@ export class PostComponent implements OnInit, OnDestroy {
     phone: [''],
   });
   items: Item[] = [];
-  constructor(
-    private fb: FormBuilder,
-    private itemService: ItemService,
-    private router: Router,
-    private _snackBar: MatSnackBar
-  ) {}
 
   postItem() {
     this.submit = true;
@@ -258,40 +234,39 @@ export class PostComponent implements OnInit, OnDestroy {
       description: this.itemDetailsFormGroup.value.description as string,
       imageUrl: this.selectFiles,
       address: this.address,
-      firstName: this.userInfoFormGroup.value.firstName as string,
-      lastName: this.userInfoFormGroup.value.lastName as string,
-      email: this.userInfoFormGroup.value.email as string,
-      phone: this.userInfoFormGroup.value.phone as string,
-
+      firstName: this.app_state.first_name,
+      lastName: this.app_state.last_name,
+      email: this.app_state.email,
+      phone: this.app_state.phone_number,
     } as Item;
 
     this.itemService.postItem(item).subscribe((result) => {
-      this._snackBar.open('Item posted successfully ' ,' ',{
-        duration:1000
+      this._snackBar.open('Item posted successfully ', ' ', {
+        duration: 1000,
       });
-      console.log(result);
-      this.router.navigateByUrl('/');
+      console.log(item);
+
       this.submit = false;
+      this.router.navigateByUrl('/');
+
+
     });
   }
   upload(event: any) {
     const file = event.target.files[0];
     this.selectFiles = file.name;
     return this.itemService.uploadImage(file).subscribe((item) => {
-      console.log('My File name is ', file.name);
+      console.log('File upload success ');
     });
-    this.selectFiles = event.target.files[0].name;
-
-
   }
   ngOnDestroy(): void {
 
     throw new Error('Method not implemented.');
-  }
-  autocompleteChanged(value: PlaceSuggestion) {
-    this.address = value.shortAddress
-    console.log('value is changing here',this.address );
+
   }
 
-  ngOnInit(): void {}
+  autocompleteChanged(value: PlaceSuggestion) {
+    this.address = value.shortAddress;
+    console.log('value is changing here', this.address);
+  }
 }
