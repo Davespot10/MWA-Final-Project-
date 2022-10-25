@@ -31,7 +31,6 @@ app.post("/api/items/img",async (req, res) => {
        if (err) {
             console.log(err)
         }
-        console.log("This is the file", req.files)
         res.json({
             path:req.files
         })
@@ -63,5 +62,5 @@ app.use((err, req, res, next) => {
 
 
 app.listen(process.env.PORT||3000, () => {
-    console.log("running on port 3000");
+   
 })
