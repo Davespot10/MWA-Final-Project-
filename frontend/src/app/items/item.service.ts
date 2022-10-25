@@ -22,6 +22,9 @@ export class ItemService {
   getItemById(id:string):Observable<Item>{
     return this.http.get<Item>(this.BASE_URL+'/' +id);
   }
+  getMyItems(email:string):Observable<Item[]>{
+    return this.http.get<Item[]>(this.BASE_URL+"/myitems/"+email);
+  }
   searchItems(qParams:any, skip:any){
     // search to be implemented here
 

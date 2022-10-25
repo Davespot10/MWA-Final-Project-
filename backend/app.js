@@ -16,7 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 const multer = require('multer')
 
 app.use(express.static(path.join(__dirname + "/uploads")))
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads");
@@ -25,12 +24,11 @@ const storage = multer.diskStorage({
     cb(null, file.originalname); 
   },
 });
-
 const uploader = multer({ storage: storage }).single('imageUrl');
 
 app.post("/api/items/img",async (req, res) => {
    await  uploader(req, res, (err) => {
-        if (err) {
+       if (err) {
             console.log(err)
         }
         console.log("This is the file", req.files)

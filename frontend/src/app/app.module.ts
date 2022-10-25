@@ -10,7 +10,6 @@ import { PostComponent } from './items/post.component';
 import { NotFoundComponent } from './items/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { SearchPipe } from './search.pipe';
@@ -21,13 +20,13 @@ import { AddressAutoCompleteComponent } from './address-auto-complete.component'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MapComponent } from './items/map.component'
+import { MyItemComponent } from './items/my-item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    HomeComponent,
     LoginComponent,
     RegisterComponent,
     ItemComponent,
@@ -38,6 +37,7 @@ import { MapComponent } from './items/map.component'
     SearchPipe,
     HeaderComponent,
     AddressAutoCompleteComponent,
+    MyItemComponent
 
 
 

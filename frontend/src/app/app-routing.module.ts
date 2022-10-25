@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './footer.component';
-import { HomeComponent } from './home.component';
 import { NotFoundComponent } from './items/not-found.component';
 import { LoginComponent } from './login.component';
 import { CheckTokenGuard } from './protect.guard';
@@ -9,32 +8,30 @@ import { CheckTokenGuard } from './protect.guard';
 import { RegisterComponent } from './register.component';
 
 const routes: Routes = [
-
   {
     path: 'login',
     component: LoginComponent,
-    title: "Login",
+    title: 'Login',
   },
   {
     path: 'maps',
     component: NotFoundComponent,
-    title: "Login",
+    title: 'Login',
   },
   {
     path: 'register',
     component: RegisterComponent,
-    title: "Signup",
+    title: 'Signup',
   },
   {
     path: 'footer',
     component: FooterComponent,
-    title: "Signup",
+    title: 'Signup',
   },
   {
     path: '',
     loadChildren: () =>
-      import('./items/item.module').then(mod => mod.ItemModule),
-    // canActivate:[CheckTokenGuard]!
+      import('./items/item.module').then((mod) => mod.ItemModule),
   },
 ];
 
@@ -42,6 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

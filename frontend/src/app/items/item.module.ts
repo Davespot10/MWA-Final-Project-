@@ -20,6 +20,7 @@ import {MatGridListModule } from '@angular/material/grid-list';
 import { CheckTokenGuard } from '../protect.guard';
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
 import { MapComponent } from './map.component';
+import { MyItemComponent } from './my-item.component';
 const ItemsComponents = [
   MatButtonModule,
   MatToolbarModule,
@@ -55,8 +56,14 @@ const ItemsComponents = [
         path: 'items/:id', component: DetailsComponent,
         title: "Item Description",
 
+      },
+      {
+        path: 'myItems', component: MyItemComponent,
+        title: "My Items",
+        canActivate:[CheckTokenGuard]!
+
       }
-      // more lazy loading to be included here
+
 
     ])
   ],

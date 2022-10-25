@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { PlaceSuggestion } from './items/PlaceSuggestion';
-import {GeocodingFeatureProperties} from './items/GeocodingFeatureProperties'
+import { GeocodingFeatureProperties } from './items/GeocodingFeatureProperties';
 @Component({
   selector: 'app-autocomplete',
   template: ` <mat-form-field class="auto-complete">
@@ -16,7 +16,6 @@ import {GeocodingFeatureProperties} from './items/GeocodingFeatureProperties'
       [formControl]="inputFieldFormControl"
       placeholder="Enter location here"
     />
-
     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
       <mat-option
         *ngFor="let option of searchOptions | async"
@@ -170,6 +169,3 @@ export class AddressAutoCompleteComponent implements OnDestroy {
     }
   }
 }
-
-
-

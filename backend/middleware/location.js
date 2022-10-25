@@ -1,6 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const Geocodio = require('geocodio-library-node');
+const Geocodio = require("geocodio-library-node");
 const geocoder = new Geocodio(process.env.GCD_API_KEY);
 function locationCalculator(address) {
   return geocoder
@@ -16,4 +16,4 @@ function locationCalculator(address) {
     });
 }
 
-module.exports =locationCalculator;
+module.exports = locationCalculator;

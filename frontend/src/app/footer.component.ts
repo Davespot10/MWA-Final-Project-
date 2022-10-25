@@ -6,13 +6,15 @@ import { UserService } from './user.service';
   selector: 'app-footer',
   template: `
   <mat-toolbar color="primary" class="footer">
+    
       
-      <a [routerLink]="['']" routerLink="" class="about">
-      <span >About us</span>
+      
+  <a routerLink="" class="about">
+      <span > About us</span>
       </a>
       <span class="footer-text">All rights reserved-L&F</span>
      
-      <a [routerLink]="['']" routerLink="" class="contact">
+      <a  routerLink="" class="contact">
       <span >Contact</span>
       </a>
       <div class="spacer"></div>
@@ -31,7 +33,7 @@ import { UserService } from './user.service';
      
       .footer {
      
-      position: absolute;
+      position: fixed;
       bottom: 0;
      
     }
