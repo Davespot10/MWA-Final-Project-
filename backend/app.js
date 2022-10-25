@@ -42,7 +42,6 @@ app.post("/api/items/img",async (req, res) => {
 })
 
 
-
 app.use(itemRouter);
 app.use(userRouter);
 
@@ -54,8 +53,6 @@ catch (err) {
     console.log("database not connected due to : "+err);
 }
 
-
-
 app.use(('*'), (req, res, next) => {
     next(new Error('Route Not found'))
     
@@ -63,8 +60,6 @@ app.use(('*'), (req, res, next) => {
 app.use((err, req, res, next) => {
     res.json({error:err.message})
 })
-
-
 
 app.listen(process.env.PORT||3000, () => {
     console.log("running on port 3000");

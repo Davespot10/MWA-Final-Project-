@@ -14,14 +14,15 @@ import { ItemService } from './item.service';
     </div>
 
     <div class="items" *ngIf="items">
-      <div fxLayout="row wrap" fxLayoutGap.gt-lg="16px grid">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <div
+          id="mat-card-items"
           fxFlex="33%"
           fxFlex.xs="100%"
           fxFlex.sm="50%"
           *ngFor="let item of items | searchText: searchItems"
         >
-          <a routerLink="/items/{{ item._id}}">
+          <a routerLink="/items/{{ item._id }}">
             <mat-card class="item-card mat-elevation-z4">
               <mat-card-header class="card-container">
                 <mat-card-title>{{ item.postType }}</mat-card-title>
@@ -32,7 +33,7 @@ import { ItemService } from './item.service';
                   <div class="item-image">
                     <img
                       mat-card-image
-                      src='{{item.imageUrl}}'
+                      src="{{ item.imageUrl }}"
                       alt="laptop"
                     />
                   </div>
@@ -65,12 +66,15 @@ import { ItemService } from './item.service';
         width: 40%;
         margin: 0 auto;
       }
+
       mat-card {
-        margin: 15px;
-        padding: 20px;
+        margin: 10px;
+        padding: 50px;
         border-radius: 10px;
         cursor: pointer;
         text-align: center;
+        height: 80%;
+
       }
 
       .search-btn {
@@ -80,8 +84,8 @@ import { ItemService } from './item.service';
         font-size: 20px;
         border-radius: 15px;
       }
-      a{
-        text-decoration:none;
+      a {
+        text-decoration: none;
       }
     `,
   ],
@@ -93,7 +97,6 @@ export class ItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllItems();
-
   }
 
   getAllItems() {
