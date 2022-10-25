@@ -22,7 +22,6 @@ import { MapService } from './map.service';
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
-  // private centroid: L.LatLngExpression = [42.3601, -71.0589]; //
   private latitude = 0;
   private longitude = 0;
 
@@ -48,12 +47,6 @@ export class MapComponent implements OnInit {
       this.latitude = message.coordinates[0];
       this.longitude = message.coordinates[1];
     });
-
-    console.log(this.mapService.location, ' the value of something');
-
     this.initMap(this.latitude, this.longitude);
-  }
-  getLocation() {
-    let coordinates = this.mapService.location;
   }
 }

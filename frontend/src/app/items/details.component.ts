@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Item } from './item.model';
 import { ItemService } from './item.service';
-import { MapComponent } from './map.component';
 import { MapService } from './map.service';
 
 @Component({
@@ -74,10 +73,7 @@ import { MapService } from './map.service';
         max-height: 15rem;
       }
       .container {
-        /* color: #e64a19; */
         display: flex;
-         /* margin:30px;
-        padding:20px; */
         justify-content: space-evenly;
         align-items: center;
       }
@@ -91,6 +87,8 @@ import { MapService } from './map.service';
         margin-right:-50px;
         padding:25px;
       }
+
+
     `,
   ],
 })
@@ -118,6 +116,5 @@ export class DetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.mapService.changeLocation(this.item.location);
-    console.log("mapService ");
   }
 }

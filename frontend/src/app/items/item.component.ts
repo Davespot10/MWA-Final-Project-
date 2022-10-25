@@ -24,7 +24,7 @@ import { MapService } from './map.service';
           fxFlex.sm="50%"
           *ngFor="let item of items | searchText: searchItems"
         >
-          <a routerLink="/items/{{ item._id }}" (onclick)="handleSubject()">
+          <a routerLink="/items/{{ item._id }}" (onclick)="handleSubject($event)">
             <mat-card class="item-card mat-elevation-z4">
               <mat-card-header class="card-container">
                 <mat-card-title>{{ item.postType }}</mat-card-title>
@@ -44,7 +44,6 @@ import { MapService } from './map.service';
                 <h3>{{ item.description }}</h3>
               </mat-card-content>
               <mat-card-footer>
-                <!-- I think we need to the map here or on the details page  -->
               </mat-card-footer>
             </mat-card>
           </a>
@@ -111,7 +110,8 @@ export class ItemComponent implements OnInit {
       },
     });
   }
-  handleSubject(){
+  handleSubject(event:any){
+    console.log("This is the event ", event)
     // this.mapService.currentLocation.next()
   }
 }

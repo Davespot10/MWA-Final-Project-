@@ -148,7 +148,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are Almost DONE, click submit to Finish</p>
+      <p>You are almost done, click submit to Finish</p>
       <div>
         <button
           mat-raised-button
@@ -176,16 +176,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   </mat-stepper> `,
   styles: [
     `
-      /* .example-container .mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  } */
+
       mat-stepper {
         display: inline;
         justify-content: space-evenly;
         align-items: center;
         padding-left: 20px;
         margin-left: 50px;
-        /* flex-direction: column; */
       }
       mat-radio-group {
         display: flex;
@@ -213,15 +210,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PostComponent implements OnInit, OnDestroy {
   submit = false;
   selectFiles = '';
-  address = 'Maharishi university address ';
-  lat = 224455;
-  lng = 102030;
-  ownerId = 20;
+  address = '';
   ITEM_TYPE = [
     'Electronics',
     'Clothing',
     'Mobile',
-    'IdCards',
+    'ID Card',
     'Jewelry',
     'Keys',
     'Pet',
@@ -237,12 +231,6 @@ export class PostComponent implements OnInit, OnDestroy {
     postType: ['', [Validators.required]],
     description: ['', [Validators.required]],
     imageUrl: [null, [Validators.required]],
-  });
-  // optional requirements we can implement multiple image upload this if we have time
-  itemImagesFormGroup = this.fb.group({
-    imageUrl2: [],
-    imageUrl3: [],
-    imageUrl4: [],
   });
 
   itemAddressFormGroup = this.fb.group({
@@ -294,10 +282,10 @@ export class PostComponent implements OnInit, OnDestroy {
     });
     this.selectFiles = event.target.files[0].name;
 
-    //  this.selectFiles = files.name;
+
   }
   ngOnDestroy(): void {
-    // cleanup and un subscription to be done here
+
     throw new Error('Method not implemented.');
   }
   autocompleteChanged(value: PlaceSuggestion) {
