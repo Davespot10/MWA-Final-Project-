@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { AppSettings } from 'src/appSettings';
 import User from './user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  public BACK_END = 'http://localhost:3000/';
+  public BACK_END = AppSettings.BASE_URL;
 
   //new
   public userState: BehaviorSubject<User> = new BehaviorSubject({

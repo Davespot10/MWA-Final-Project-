@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from './item.model';
 import {Observable} from 'rxjs'
-
+import { AppSettings } from 'src/appSettings';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-   BASE_URL="http://localhost:3000/api/items";
+
+   BASE_URL=AppSettings.BASE_URL + "api/items";
     // to be moved to environmental variable
 
   constructor(private http:HttpClient) { }

@@ -39,8 +39,6 @@ app.post("/api/items/img",async (req, res) => {
     })
 })
 
-
-
 app.use(itemRouter);
 app.use(userRouter);
 
