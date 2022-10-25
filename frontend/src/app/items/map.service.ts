@@ -15,6 +15,6 @@ export class MapService {
 
   constructor() {}
   changeLocation(location:ItemLocation){
-    this.messageSource.next(location)
+    return this.messageSource.next(location);
   }
 }

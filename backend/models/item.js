@@ -38,8 +38,7 @@ const ItemSchema = new mongoose.Schema(
       type: Date,
     },
     address: {
-      type: String,
-      required: [true],
+      type: String
     },
     location: {
       type: {

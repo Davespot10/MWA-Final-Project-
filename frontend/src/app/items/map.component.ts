@@ -22,13 +22,13 @@ import { MapService } from './map.service';
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
-  private latitude = 0;
+  private latitude = 0 ;
   private longitude = 0;
 
   public initMap(lat: number, lng: number): void {
     this.map = L.map('map', {
       center: [(this.latitude = lat), (this.latitude = lng)],
-      zoom: 12,
+      zoom: 1,
     });
 
     const layer = L.tileLayer(

@@ -19,9 +19,11 @@ const postItems = async (req, res, next) => {
 
   locate = {
     type: "Point",
-    coordinates: [loc[0].latitude, loc[0].longitude],
+    coordinates: [loc[0].longitude,loc[0].latitude,],
     formattedAddress: loc[0].formattedAddress,
   };
+
+  console.log("Location ", locate)
 
   const fileStream = fs.createReadStream(
     path.join(__dirname, "..", "uploads", req.body.imageUrl)
@@ -49,8 +51,10 @@ const postItems = async (req, res, next) => {
       "owner.phone": req.body.phone,
     };
 
-    const item = await Item.create(post);
-
+    console.log("post items ", post)
+ 
+     const item =  await Item.create(post);
+  
     res.status(StatusCodes.CREATED).json(item);
   } catch (error) {
     res.json({ error });

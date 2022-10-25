@@ -103,12 +103,15 @@ export class DetailsComponent implements OnInit {
     activatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.itemService.getItemById(params['id']).subscribe((result) => {
+
           this.item = result;
+          this.mapService.changeLocation(this.item.location);
         });
       }
     });
   }
   ngOnInit(): void {
+
     this.mapService.changeLocation(this.item.location);
   }
 }
